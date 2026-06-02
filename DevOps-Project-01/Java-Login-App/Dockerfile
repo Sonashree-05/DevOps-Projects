@@ -6,7 +6,7 @@ COPY . .
 
 RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:11-jre 
+FROM gcr.io/distroless/java11-debian11 
 
 WORKDIR /app
 
@@ -14,4 +14,4 @@ COPY --from=builder /app/target/*.war app.war
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","app.war"]
+ENTRYPOINT ["java","-jar","/app/app.war"]
